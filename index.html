@@ -9,11 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
+            padding-bottom: 80px; /* Add padding to prevent content from being hidden by the bar */
         }
         h1,
         h2,
@@ -21,33 +21,7 @@
             font-family: 'mrs-eaves-xl-serif-ot-nar', serif;
         }
         .hero-text-shadow {
-            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-        }
-        /* Estilos para la tarjeta con efecto de giro */
-        .flip-card {
-            perspective: 1500px;
-        }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-        }
-        .flip-card.is-flipped .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden; /* Safari */
-            backface-visibility: hidden;
-            border-radius: 1.5rem; /* rounded-3xl */
-            overflow: hidden;
-        }
-        .flip-card-back {
-            transform: rotateY(180deg);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
         /* Estilos para el acordeón de FAQ */
         .faq-answer {
@@ -55,110 +29,69 @@
             overflow: hidden;
             transition: max-height 0.5s ease-in-out;
         }
-        /* Estilos para el modal */
-        .modal-overlay {
-            transition: opacity 0.3s ease;
-        }
-        .modal-container {
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .swiper-slide {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* Styles for the referral bar visibility */
+        #referral-bar {
+            transition: transform 0.5s ease-in-out;
         }
     </style>
 </head>
-<body class="bg-[#f6f6f6] text-stone-800">
+<body class="bg-[#F7F4F1] text-stone-800">
     
     <!-- Canvas for snow effect -->
     <canvas id="snow-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none" style="z-index: 9999;"></canvas>
 
-    <!-- Floating Navbar -->
-    <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] lg:w-2/3">
-        <nav class="bg-white/70 backdrop-blur-lg rounded-full shadow-xl px-6 py-3 flex justify-between items-center ring-1 ring-black/5">
-            <a href="#">
-                <img src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1752514553/logo-FE-fondoblanco_c8tlxc.png" alt="Logo de Saúl Díaz Fotografía" class="h-10">
-            </a>
-            <a href="#booking" class="bg-[#916B3C] text-white font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity duration-300">
-                Reservar
-            </a>
-        </nav>
-    </header>
-
     <main class="relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-5">
-            <div class="relative">
+        <!-- Hero Section -->
+        <section id="hero" class="relative min-h-screen bg-cover bg-center flex flex-col justify-end text-white" style="background-image: url('https://res.cloudinary.com/drrhn6t1c/image/upload/v1759779191/Gemini_Generated_Image_1pkp3k1pkp3k1pkp_wbbpr4.jpg');">
+            <!-- Main Content (Bottom Left) -->
+            <div class="relative z-10 p-8 md:p-16 pb-24 md:pb-32 max-w-3xl">
+                <!-- Logo -->
+                <img src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1752514553/logo-FE-fondoblanco_c8tlxc.png" alt="Logo de Saúl Díaz Fotografía" class="h-12 mb-8">
                 
-                <!-- Hero Section V5 -->
-                <div class="relative min-h-[80vh] bg-cover bg-center rounded-3xl overflow-hidden flex flex-col justify-center items-center text-center" style="background-image: url('https://res.cloudinary.com/drrhn6t1c/image/upload/v1757538276/tessa-rampersad-5toRIWF2GUY-unsplash_dwhsyd.jpg');">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                    <div class="relative z-10 p-8 sm:p-12 md:p-16 w-full">
-                        <!-- Main Content -->
-                        <div class="w-full">
-                            <h1 class="text-6xl md:text-8xl font-bold leading-tight text-white hero-text-shadow uppercase">Christmas & Memories</h1>
-                            <p class="mt-2 text-2xl md:text-3xl text-white/90 hero-text-shadow tracking-widest uppercase">mini sesiones</p>
-                            
-                            <div class="mt-16">
-                                <p class="text-xl md:text-2xl text-white/90 hero-text-shadow">
-                                    Una navidad que se queda para siempre.
-                                </p>
-                                <a href="#planes" class="mt-4 inline-block bg-[#916B3C] text-white font-bold text-lg px-16 py-4 rounded-full hover:opacity-90 transition-opacity duration-300">
-                                    Ver Planes
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Main Title -->
+                <h1 class="text-5xl md:text-6xl leading-tight text-white hero-text-shadow" style="font-family: 'mrs-eaves-xl-serif-ot-nar', serif;">
+                    La Navidad cambia, aunque el árbol sea el mismo
+                </h1>
+
+                <!-- Subtext/Poem -->
+                <p class="mt-6 text-lg text-stone-200 leading-relaxed hero-text-shadow">
+                    Un año están todos… al siguiente, alguien falta. Las risas suenan distinto y lo que hoy parece rutina, mañana será nostalgia. Guarda lo que aún tienes cerca. Más que una foto, es detener el tiempo.
+                </p>
+
+                <!-- Call to Action -->
+                <a href="#planes" class="mt-8 inline-block bg-[#8C6D5B] text-white font-bold text-lg px-10 py-3 rounded-full hover:opacity-90 transition-opacity duration-300">
+                    Ver Paquetes
+                </a>
             </div>
-        </div>
-        
-        <!-- Emotional Carousel Section -->
-        <section id="emotional-carousel" class="relative min-h-[50vh] bg-cover bg-center flex items-center" style="background-image: url('https://res.cloudinary.com/drrhn6t1c/image/upload/v1758414012/chad-madden-SUTfFCAHV_A-unsplash_imjxs0.jpg');">
-            <div class="absolute inset-0 bg-black/60"></div>
-            <div class="relative z-10 container mx-auto px-6 w-full flex justify-center">
-                <div class="swiper emotionalSwiper max-w-3xl"> 
-                    <div class="swiper-wrapper min-h-[200px]">
-                        <!-- Slide 1 -->
-                        <div class="swiper-slide text-center">
-                            <h3 class="text-4xl md:text-5xl text-white leading-tight hero-text-shadow" style="font-family: 'mrs-eaves-xl-serif-ot-nar', serif;">Hoy están todos<br>Mañana… quizá ya no se junten igual</h3>
-                        </div>
-                        <!-- Slide 2 -->
-                        <div class="swiper-slide text-center">
-                           <h3 class="text-4xl md:text-5xl text-white leading-tight hero-text-shadow" style="font-family: 'mrs-eaves-xl-serif-ot-nar', serif;">Tus hijos crecen<br>Y un día, pasarán la navidad en otra mesa</h3>
-                        </div>
-                        <!-- Slide 3 -->
-                        <div class="swiper-slide text-center">
-                            <h3 class="text-4xl md:text-5xl text-white leading-tight hero-text-shadow" style="font-family: 'mrs-eaves-xl-serif-ot-nar', serif;">Cada navidad es distinta<br>Esta no se repite</h3>
-                        </div>
-                        <!-- Slide 4 -->
-                        <div class="swiper-slide text-center">
-                            <div>
-                                <h3 class="text-3xl md:text-4xl text-white hero-text-shadow">Christmas & Memories - mini sesiones</h3>
-                                <p class="mt-2 text-4xl md:text-5xl text-[#916B3C] hero-text-shadow" style="font-family: 'mrs-eaves-xl-serif-ot-nar', serif;">Para capturar lo que no se repite.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </section>
+
+        <!-- Title Section -->
+        <section id="title-section" class="relative bg-cover py-28 md:py-36" style="background-image: url('https://res.cloudinary.com/drrhn6t1c/image/upload/v1759781609/Gemini_Generated_Image_nnzarhnnzarhnnza_vytpom.png'); background-position: center 60%;">
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <h2 class="text-6xl md:text-8xl font-bold uppercase text-[#8C6D5B]">Christmas & Memories</h2>
+                <p class="mt-2 text-2xl md:text-3xl text-stone-700 tracking-widest uppercase">mini sesiones</p>
+                <a href="#planes" class="mt-8 inline-block bg-[#8C6D5B] text-white font-bold text-lg px-10 py-3 rounded-full hover:opacity-90 transition-opacity duration-300">
+                    Ver Paquetes
+                </a>
             </div>
         </section>
 
         <!-- Info Section -->
-        <section id="info" class="py-20 bg-[#991B1B]">
+        <section id="info" class="py-20 bg-[#3A5A40]">
             <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
                     <!-- Info Item 1 -->
                     <div class="flex flex-col items-center">
                         <div class="w-20 h-20 mb-6 flex items-center justify-center bg-white rounded-full shadow-lg border border-stone-200">
-                             <svg class="w-10 h-10 text-[#916B3C]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                             <svg class="w-10 h-10 text-[#8C6D5B]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         </div>
-                        <h3 class="text-2xl font-semibold text-white mb-2 uppercase">Solo 25 Familias</h3>
+                        <h3 class="text-2xl font-semibold text-white mb-2 uppercase">Solo 25 espacios</h3>
                         <p class="text-stone-100">Este año las sesiones son exclusivas. Asegura uno de los 25 lugares disponibles.</p>
                     </div>
                      <!-- Info Item 2 -->
                     <div class="flex flex-col items-center">
                         <div class="w-20 h-20 mb-6 flex items-center justify-center bg-white rounded-full shadow-lg border border-stone-200">
-                            <svg class="w-10 h-10 text-[#916B3C]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                            <svg class="w-10 h-10 text-[#8C6D5B]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
                         </div>
                         <h3 class="text-2xl font-semibold text-white mb-2 uppercase">Preventa Especial</h3>
                         <p class="text-stone-100">Los primeros 10 en reservar ahorran $500 y aseguran su lugar. ¡No esperes!</p>
@@ -166,7 +99,7 @@
                      <!-- Info Item 3 -->
                     <div class="flex flex-col items-center">
                         <div class="w-20 h-20 mb-6 flex items-center justify-center bg-white rounded-full shadow-lg border border-stone-200">
-                            <svg class="w-10 h-10 text-[#916B3C]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            <svg class="w-10 h-10 text-[#8C6D5B]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                         </div>
                         <h3 class="text-2xl font-semibold text-white mb-2 uppercase">Lealtad de Oro</h3>
                         <p class="text-stone-100">¿Ya has posado para mi cámara? Tienes acceso al precio de preventa siempre.</p>
@@ -174,7 +107,7 @@
                      <!-- Info Item 4 -->
                      <div class="flex flex-col items-center">
                         <div class="w-20 h-20 mb-6 flex items-center justify-center bg-white rounded-full shadow-lg border border-stone-200">
-                            <svg class="w-10 h-10 text-[#916B3C]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><line x1="12" y1="7" x2="16" y2="3"/><line x1="12" y1="7" x2="8" y2="3"/></svg>
+                            <svg class="w-10 h-10 text-[#8C6D5B]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><line x1="12" y1="7" x2="16" y2="3"/><line x1="12" y1="7" x2="8" y2="3"/></svg>
                         </div>
                         <h3 class="text-2xl font-semibold text-white mb-2 uppercase">Recomienda y Gana</h3>
                         <p class="text-stone-100">Si un amigo reserva por ti, ganas 10 fotos extra. ¡Los recuerdos compartidos valen más!</p>
@@ -184,7 +117,7 @@
         </section>
 
         <!-- Gallery Section -->
-        <section id="gallery" class="py-20 bg-[#f6f6f6]">
+        <section id="gallery" class="py-20 bg-[#F7F4F1]">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-5xl font-bold text-stone-800 uppercase">MOODBOARD DEL SET</h2>
                 <p class="mt-4 text-lg text-stone-600">Fotos de referencia, no oficiales</p>
@@ -194,71 +127,71 @@
                     <img class="rounded-2xl object-cover w-full h-full shadow-lg" src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1758412019/551325498_824870766718978_3749429019275772270_n_yi2f58.jpg" alt="Niña sonriendo en ambiente navideño">
                     <img class="rounded-2xl object-cover w-full h-full shadow-lg" src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1758412019/551503375_809866384898142_4717706556477668569_n_gwqcto.jpg" alt="Detalle de decoración navideña en sesión de fotos">
                 </div>
+                <div class="mt-12">
+                    <a href="#planes" class="inline-block bg-[#8C6D5B] text-white font-bold text-lg px-10 py-3 rounded-full hover:opacity-90 transition-opacity duration-300">
+                        Ver Paquetes
+                    </a>
+                </div>
             </div>
         </section>
 
         <!-- Planes Section -->
-        <section id="planes" class="py-20 bg-[#991B1B]">
+        <section id="planes" class="py-20 bg-[#3A5A40]">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-5xl font-bold text-white uppercase">Nuestros Planes</h2>
-                <p class="mt-4 text-lg text-stone-100">Haz clic sobre un plan para ver los detalles.</p>
-                <div class="mt-12 grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+                <h2 class="text-5xl font-bold text-white uppercase">NUESTROS PAQUETES</h2>
+                <p class="mt-4 text-lg text-stone-100">Elige el paquete perfecto para ti.</p>
+                <div class="mt-12 grid md:grid-cols-2 gap-10 max-w-3xl mx-auto">
                     
                     <!-- Plan 1 Card -->
-                    <div class="flip-card aspect-[3/4] cursor-pointer" onclick="this.classList.toggle('is-flipped')">
-                        <div class="flip-card-inner shadow-2xl rounded-3xl">
-                            <!-- Front Face -->
-                            <div class="flip-card-front bg-cover bg-center flex justify-center items-center" style="background-image: url('https://res.cloudinary.com/drrhn6t1c/image/upload/v1757540321/sart-insta-6_dgcmni.jpg');">
-                                <div class="absolute inset-0 bg-black/40 rounded-3xl"></div>
-                                <h3 class="relative text-white text-5xl font-bold hero-text-shadow uppercase">Plan 1</h3>
+                    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col p-8">
+                        <div class="text-left flex flex-col justify-between flex-grow">
+                            <div>
+                                <h3 class="text-3xl font-bold text-[#8C6D5B] mb-4 uppercase">Paquete Esencial</h3>
+                                <p class="text-4xl font-bold text-stone-800 mb-2">
+                                    $2,100 <span class="text-lg font-normal text-stone-600 ml-2">(Preventa)</span>
+                                </p>
+                                <p class="text-lg text-stone-500 mb-6">
+                                    Precio normal <span class="line-through">$2,600</span>
+                                </p>
+                                <ul class="space-y-3 text-lg text-left">
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>25 minutos de sesión</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>15 fotos digitales en alta resolución</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>Máximo 5 personas</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        <span>Galería Online privada</span>
+                                    </li>
+                                </ul>
                             </div>
-                            <!-- Back Face -->
-                            <div class="flip-card-back bg-white p-8 border border-gray-200 text-left flex flex-col justify-between">
-                                <div>
-                                    <h3 class="text-3xl font-bold text-[#916B3C] mb-4">Plan 1</h3>
-                                    <p class="text-4xl font-bold text-stone-800 mb-6">
-                                        $2,100 <span class="text-lg font-normal text-stone-600">(Preventa)</span>
-                                    </p>
-                                    <ul class="space-y-3 text-lg text-left">
-                                        <li class="flex items-start">
-                                            <svg class="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                            <span>25 minutos de sesión</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <svg class="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                            <span>15 fotos digitales en alta resolución</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <svg class="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                            <span>Máximo 5 personas</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <svg class="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                            <span>Galería Online privada</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <a href="#booking" class="w-full mt-6 text-center bg-[#916B3C] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity duration-300">
-                                    Seleccionar Plan
-                                </a>
-                            </div>
+                            <a href="#booking" class="w-full mt-8 text-center bg-[#8C6D5B] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity duration-300">
+                                Seleccionar Paquete
+                            </a>
                         </div>
                     </div>
 
                     <!-- Plan 2 Card -->
-                    <div class="flip-card aspect-[3/4] cursor-pointer" onclick="this.classList.toggle('is-flipped')">
-                        <div class="flip-card-inner shadow-2xl rounded-3xl">
-                            <!-- Front Face -->
-                            <div class="flip-card-front bg-cover bg-center flex justify-center items-center" style="background-image: url('https://res.cloudinary.com/drrhn6t1c/image/upload/v1757540353/sart-insta-28_vwfmdn.jpg');">
-                                <div class="absolute inset-0 bg-black/40 rounded-3xl"></div>
-                                <h3 class="relative text-white text-5xl font-bold hero-text-shadow uppercase">Plan 2</h3>
-                            </div>
-                            <!-- Back Face -->
-                            <div class="flip-card-back bg-white p-8 border border-gray-200 text-left flex flex-col justify-between">
+                    <div class="relative mt-8 md:mt-0">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#8C6D5B] text-white text-sm font-bold uppercase px-4 py-1 rounded-full z-10">
+                            Más Popular
+                        </div>
+                        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col relative border-4 border-[#8C6D5B] p-8 h-full">
+                            <div class="text-left flex flex-col justify-between flex-grow">
                                 <div>
-                                    <h3 class="text-3xl font-bold text-[#916B3C] mb-4">Plan 2</h3>
-                                    <p class="text-4xl font-bold text-stone-800 mb-6">
-                                        $2,700 <span class="text-lg font-normal text-stone-600">(Preventa)</span>
+                                    <h3 class="text-3xl font-bold text-[#8C6D5B] mb-4 uppercase">Paquete Premium</h3>
+                                    <p class="text-4xl font-bold text-stone-800 mb-2">
+                                        $2,700 <span class="text-lg font-normal text-stone-600 ml-2">(Preventa)</span>
+                                    </p>
+                                    <p class="text-lg text-stone-500 mb-6">
+                                        Precio normal <span class="line-through">$3,200</span>
                                     </p>
                                     <ul class="space-y-3 text-lg text-left">
                                         <li class="flex items-start">
@@ -277,14 +210,14 @@
                                             <svg class="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                             <span>Galería Online privada</span>
                                         </li>
-                                         <li class="flex items-start font-semibold text-[#916B3C]">
+                                         <li class="flex items-start font-semibold text-[#8C6D5B]">
                                             <svg class="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                             <span>10 fotos impresas de regalo</span>
                                         </li>
                                     </ul>
                                 </div>
-                                <a href="#booking" class="w-full mt-6 text-center bg-[#916B3C] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity duration-300">
-                                    Seleccionar Plan
+                                <a href="#booking" class="w-full mt-8 text-center bg-[#8C6D5B] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity duration-300">
+                                    Seleccionar Paquete
                                 </a>
                             </div>
                         </div>
@@ -294,7 +227,7 @@
         </section>
 
         <!-- FAQ Section -->
-        <section id="faq" class="py-20 bg-[#f6f6f6]">
+        <section id="faq" class="py-20 bg-[#F7F4F1]">
             <div class="container mx-auto px-6 max-w-4xl">
                 <h2 class="text-5xl font-bold text-stone-800 text-center mb-12 uppercase">Preguntas Frecuentes</h2>
                 <div class="space-y-4">
@@ -387,7 +320,7 @@
         </section>
 
         <!-- Booking Section -->
-        <section id="booking" class="py-20 bg-[#991B1B]">
+        <section id="booking" class="py-20 bg-[#3A5A40]">
             <div class="container mx-auto px-6 max-w-4xl text-center">
                 <h2 class="text-5xl font-bold text-white text-center mb-12 uppercase">Reserva tu Sesión</h2>
                 <div class="bg-white p-2 sm:p-4 rounded-2xl shadow-lg min-h-[700px]">
@@ -411,7 +344,7 @@
         </section>
 
         <!-- WhatsApp Section -->
-        <section id="whatsapp" class="py-20 bg-[#f6f6f6]">
+        <section id="whatsapp" class="py-20 bg-[#F7F4F1]">
             <div class="container mx-auto px-6 max-w-4xl text-center">
                 <h2 class="text-5xl font-bold text-stone-800 uppercase">¿Tienes más dudas?</h2>
                 <p class="mt-4 text-lg text-stone-600">
@@ -425,26 +358,45 @@
                 </a>
             </div>
         </section>
+        
+        <!-- Instagram Section -->
+        <section id="instagram" class="py-20 bg-[#3A5A40]">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                <h2 class="text-5xl font-bold text-white uppercase">SÍGUEME EN INSTAGRAM</h2>
+                <p class="mt-4 text-lg text-stone-100">
+                    Ve más de mi trabajo y no te pierdas de las últimas novedades.
+                </p>
+                <a href="https://www.instagram.com/finite.estudio/" 
+                   target="_blank" 
+                   class="mt-8 inline-flex items-center justify-center bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 text-white font-bold text-lg px-10 py-4 rounded-full hover:opacity-90 transition-opacity duration-300 shadow-lg">
+                    <svg class="w-6 h-6 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" /></svg>
+                    <span>@finite.estudio</span>
+                </a>
+            </div>
+        </section>
 
-        <!-- Referral Modal -->
-        <div id="referral-modal" class="fixed inset-0 z-[10000] flex items-center justify-center p-4 hidden">
-            <!-- Overlay -->
-            <div class="modal-overlay fixed inset-0 bg-black/60 opacity-0" id="modal-overlay"></div>
-            <!-- Modal Container -->
-            <div class="modal-container bg-white rounded-2xl shadow-2xl w-full max-w-md mx-auto text-center p-8 relative opacity-0 scale-95" id="modal-container">
-                <button id="close-modal" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-                <div class="w-16 h-16 mb-6 mx-auto flex items-center justify-center bg-[#916B3C] rounded-full">
-                     <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><line x1="12" y1="7" x2="16" y2="3"></line><line x1="12" y1="7" x2="8" y2="3"></line></svg>
+    </main>
+
+    <!-- Referral Bar -->
+    <div id="referral-bar" class="fixed bottom-0 left-0 w-full z-40 bg-white/80 backdrop-blur-md p-3 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] transition-transform duration-500 translate-y-full">
+        <div class="max-w-7xl mx-auto flex items-center justify-center sm:justify-between px-4">
+            <div class="hidden sm:flex items-center mr-4">
+                 <div class="w-10 h-10 flex items-center justify-center bg-[#8C6D5B] rounded-full mr-3">
+                     <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><line x1="12" y1="7" x2="16" y2="3"></line><line x1="12" y1="7" x2="8" y2="3"></line></svg>
                 </div>
-                <h3 class="text-3xl font-bold text-stone-800 mb-3">¡Gana Fotos Extra!</h3>
-                <p class="text-lg text-stone-600">
-                    ¡Recomiéndanos con un amigo o familiar! Si reservan gracias a ti, <strong class="font-bold text-[#916B3C]">te regalamos 10 fotos digitales extra</strong> en tu galería.
+                <p class="text-stone-700 text-sm">
+                    <strong>¡Gana Fotos Extra!</strong> Recomiéndanos y si tu amigo reserva, <span class="font-semibold text-[#8C6D5B]">te regalamos 10 fotos digitales.</span>
                 </p>
             </div>
+             <p class="text-stone-700 text-sm text-center sm:hidden">
+                <strong>¡Gana Fotos Extra!</strong> Recomiéndanos y obtén 10 fotos de regalo.
+            </p>
+            <button id="close-referral-bar" class="text-stone-500 hover:text-stone-800 transition-colors ml-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
         </div>
-    </main>
+    </div>
+
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
@@ -533,60 +485,39 @@
                 screenWidth = window.innerWidth;
                 screenHeight = window.innerHeight;
                 canvas.width = screenWidth;
+                screenHeight = window.innerHeight;
                 canvas.height = screenHeight;
             });
 
-            // Referral Modal Logic
-            const modal = document.getElementById('referral-modal');
-            const overlay = document.getElementById('modal-overlay');
-            const container = document.getElementById('modal-container');
-            const closeModalBtn = document.getElementById('close-modal');
+            // Referral Bar Logic
+            const referralBar = document.getElementById('referral-bar');
+            const closeReferralBarBtn = document.getElementById('close-referral-bar');
+            let barShown = false;
 
-            const openModal = () => {
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    overlay.classList.remove('opacity-0');
-                    container.classList.remove('opacity-0', 'scale-95');
-                }, 10);
-            };
+            if (referralBar) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 400 && !barShown) {
+                        referralBar.style.transform = 'translateY(0)';
+                        barShown = true;
+                    }
+                });
 
-            const closeModal = () => {
-                overlay.classList.add('opacity-0');
-                container.classList.add('opacity-0', 'scale-95');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                }, 300);
-            };
-
-            // Show modal after 8 seconds if it hasn't been shown before
-            if (!sessionStorage.getItem('modalShown')) {
-                setTimeout(() => {
-                    openModal();
-                    sessionStorage.setItem('modalShown', 'true');
-                }, 8000);
+                if (closeReferralBarBtn) {
+                     closeReferralBarBtn.addEventListener('click', () => {
+                        referralBar.style.transform = 'translateY(100%)';
+                        setTimeout(() => {
+                             document.body.style.paddingBottom = '0';
+                        }, 500);
+                    });
+                }
             }
-
-            closeModalBtn.addEventListener('click', closeModal);
-            overlay.addEventListener('click', closeModal);
-
-            // Emotional Carousel
-            var emotionalSwiper = new Swiper(".emotionalSwiper", {
-                spaceBetween: 30,
-                centeredSlides: true,
-                effect: "fade",
-                fadeEffect: {
-                    crossFade: true
-                },
-                autoplay: {
-                    delay: 4500,
-                    disableOnInteraction: false,
-                },
-                loop: true,
-            });
         });
     </script>
 </body>
 </html>
+
+
+
 
 
 
