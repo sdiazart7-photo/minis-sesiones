@@ -13,6 +13,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
+            padding-top: 60px; /* Space for the fixed countdown bar */
             padding-bottom: 80px; /* Add padding to prevent content from being hidden by the bar */
         }
         h1,
@@ -36,10 +37,37 @@
     </style>
 </head>
 <body class="bg-[#F7F4F1] text-stone-800">
-    
-    <!-- Canvas for snow effect -->
-    <canvas id="snow-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none" style="z-index: 9999;"></canvas>
 
+    <!-- Countdown Bar -->
+    <div id="countdown-bar" class="fixed top-0 left-0 w-full bg-[#3A5A40] text-white p-3 z-[10000] shadow-lg flex items-center justify-center text-center">
+        <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+            <p class="text-sm font-semibold uppercase tracking-wider">
+                PRECIOS ESPECIALES DE LA <span id="phase-name">FASE 1</span> TERMINAN EN
+            </p>
+            <div id="countdown-timer" class="flex items-center gap-2 font-mono">
+                <div class="bg-white text-[#3A5A40] rounded-md px-2 py-1 text-center">
+                    <span id="days" class="font-bold text-xl">00</span>
+                    <span class="text-xs block opacity-75">Días</span>
+                </div>
+                <div class="text-white font-bold text-xl">:</div>
+                <div class="bg-white text-[#3A5A40] rounded-md px-2 py-1 text-center">
+                    <span id="hours" class="font-bold text-xl">00</span>
+                    <span class="text-xs block opacity-75">Hrs</span>
+                </div>
+                <div class="text-white font-bold text-xl">:</div>
+                <div class="bg-white text-[#3A5A40] rounded-md px-2 py-1 text-center">
+                    <span id="minutes" class="font-bold text-xl">00</span>
+                    <span class="text-xs block opacity-75">Min</span>
+                </div>
+                <div class="text-white font-bold text-xl">:</div>
+                <div class="bg-white text-[#3A5A40] rounded-md px-2 py-1 text-center">
+                    <span id="seconds" class="font-bold text-xl">00</span>
+                    <span class="text-xs block opacity-75">Seg</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <main class="relative z-10">
         <!-- Hero Section -->
         <section id="hero" class="relative min-h-screen bg-cover bg-center flex flex-col justify-end text-white" style="background-image: url('https://res.cloudinary.com/drrhn6t1c/image/upload/v1759779191/Gemini_Generated_Image_1pkp3k1pkp3k1pkp_wbbpr4.jpg');">
@@ -93,8 +121,8 @@
                         <div class="w-20 h-20 mb-6 flex items-center justify-center bg-white rounded-full shadow-lg border border-stone-200">
                             <svg class="w-10 h-10 text-[#8C6D5B]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
                         </div>
-                        <h3 class="text-2xl font-semibold text-white mb-2 uppercase">Preventa Especial</h3>
-                        <p class="text-stone-100">Los primeros 10 en reservar ahorran $500 y aseguran su lugar. ¡No esperes!</p>
+                        <h3 class="text-2xl font-semibold text-white mb-2 uppercase">Preventa por Fases</h3>
+                        <p class="text-stone-100">Aprovecha los precios especiales reservando lo antes posible.</p>
                     </div>
                      <!-- Info Item 3 -->
                     <div class="flex flex-col items-center">
@@ -102,7 +130,7 @@
                             <svg class="w-10 h-10 text-[#8C6D5B]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                         </div>
                         <h3 class="text-2xl font-semibold text-white mb-2 uppercase">Lealtad de Oro</h3>
-                        <p class="text-stone-100">¿Ya has posado para mi cámara? Tienes acceso al precio de preventa siempre.</p>
+                        <p class="text-stone-100">¿Ya has posado para mi cámara? Tienes acceso al precio de Fase 1 siempre.</p>
                     </div>
                      <!-- Info Item 4 -->
                      <div class="flex flex-col items-center">
@@ -140,6 +168,13 @@
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-5xl font-bold text-white uppercase">NUESTROS PAQUETES</h2>
                 <p class="mt-4 text-lg text-stone-100">Elige el paquete perfecto para ti.</p>
+                
+                <div class="flex justify-center items-center gap-2 md:gap-4 my-12 bg-gray-800/20 p-2 rounded-full max-w-sm mx-auto">
+                    <button id="phase-1-btn" class="phase-btn flex-1 font-bold py-2 px-6 rounded-full text-sm md:text-base">Fase 1</button>
+                    <button id="phase-2-btn" class="phase-btn flex-1 font-bold py-2 px-6 rounded-full text-sm md:text-base" disabled>Fase 2</button>
+                    <button id="phase-3-btn" class="phase-btn flex-1 font-bold py-2 px-6 rounded-full text-sm md:text-base" disabled>Fase 3</button>
+                </div>
+
                 <div class="mt-12 grid md:grid-cols-2 gap-10 max-w-3xl mx-auto">
                     
                     <!-- Plan 1 Card -->
@@ -147,11 +182,8 @@
                         <div class="text-left flex flex-col justify-between flex-grow">
                             <div>
                                 <h3 class="text-3xl font-bold text-[#8C6D5B] mb-4 uppercase">Paquete Esencial</h3>
-                                <p class="text-4xl font-bold text-stone-800 mb-2">
-                                    $2,100 <span class="text-lg font-normal text-stone-600 ml-2">(Preventa)</span>
-                                </p>
-                                <p class="text-lg text-stone-500 mb-6">
-                                    Precio normal <span class="line-through">$2,600</span>
+                                <p class="text-4xl font-bold text-stone-800 mb-6 h-12 flex items-center">
+                                    <span id="price-esencial">$2,100</span>
                                 </p>
                                 <ul class="space-y-3 text-lg text-left">
                                     <li class="flex items-start">
@@ -172,8 +204,8 @@
                                     </li>
                                 </ul>
                             </div>
-                            <a href="#booking" class="w-full mt-8 text-center bg-[#8C6D5B] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity duration-300">
-                                Seleccionar Paquete
+                            <a href="#booking" class="package-cta w-full mt-8 text-center bg-[#8C6D5B] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity duration-300">
+                                Reservar Mini Sesión
                             </a>
                         </div>
                     </div>
@@ -187,11 +219,8 @@
                             <div class="text-left flex flex-col justify-between flex-grow">
                                 <div>
                                     <h3 class="text-3xl font-bold text-[#8C6D5B] mb-4 uppercase">Paquete Premium</h3>
-                                    <p class="text-4xl font-bold text-stone-800 mb-2">
-                                        $2,700 <span class="text-lg font-normal text-stone-600 ml-2">(Preventa)</span>
-                                    </p>
-                                    <p class="text-lg text-stone-500 mb-6">
-                                        Precio normal <span class="line-through">$3,200</span>
+                                    <p class="text-4xl font-bold text-stone-800 mb-6 h-12 flex items-center">
+                                        <span id="price-premium">$2,700</span>
                                     </p>
                                     <ul class="space-y-3 text-lg text-left">
                                         <li class="flex items-start">
@@ -216,8 +245,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <a href="#booking" class="w-full mt-8 text-center bg-[#8C6D5B] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity duration-300">
-                                    Seleccionar Paquete
+                                <a href="#booking" class="package-cta w-full mt-8 text-center bg-[#8C6D5B] text-white font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity duration-300">
+                                    Reservar Mini Sesión
                                 </a>
                             </div>
                         </div>
@@ -231,6 +260,18 @@
             <div class="container mx-auto px-6 max-w-4xl">
                 <h2 class="text-5xl font-bold text-stone-800 text-center mb-12 uppercase">Preguntas Frecuentes</h2>
                 <div class="space-y-4">
+                    <!-- FAQ Item -->
+                    <div class="bg-white rounded-lg shadow-md">
+                        <button class="faq-question w-full flex justify-between items-center text-left text-xl font-semibold p-6 focus:outline-none">
+                            <span>¿Qué son las fases de preventa y cómo funcionan?</span>
+                            <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="faq-answer text-stone-600">
+                            <div class="px-6 pb-6">
+                               <p>Para premiar a quienes reservan con anticipación, tenemos precios especiales divididos en tres fases. La Fase 1 tiene el mayor descuento, la Fase 2 un descuento intermedio, y la Fase 3 es el precio normal sin descuento. Los precios se actualizan automáticamente en la página según las fechas de cada fase. ¡Mientras antes reserves, más ahorras!</p>
+                            </div>
+                        </div>
+                    </div>
                     <!-- FAQ Item 1 -->
                     <div class="bg-white rounded-lg shadow-md">
                         <button class="faq-question w-full flex justify-between items-center text-left text-xl font-semibold p-6 focus:outline-none">
@@ -251,7 +292,7 @@
                         </button>
                         <div class="faq-answer text-stone-600">
                             <div class="px-6 pb-6">
-                               <p>Las sesiones se realizarán en un estudio fotográfico ubicado en Fundadores (Tijuana B.C), que estará decorado con una hermosa temática navideña.</p>
+                               <p>Las sesiones se realizarán en un estudio fotográfico ubicado en Fundadores (Tijuana B.C) , que estará decorado con una hermosa temática navideña.</p>
                             </div>
                         </div>
                     </div>
@@ -398,10 +439,156 @@
     </div>
 
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
-        // Wrap all scripts in a DOMContentLoaded event listener to ensure the page is fully loaded
         document.addEventListener('DOMContentLoaded', function() {
+
+            // --- Countdown and Pricing Logic ---
+            const countdownElements = {
+                days: document.getElementById('days'),
+                hours: document.getElementById('hours'),
+                minutes: document.getElementById('minutes'),
+                seconds: document.getElementById('seconds'),
+                phaseName: document.getElementById('phase-name')
+            };
+
+            const priceSpans = {
+                esencial: document.getElementById('price-esencial'),
+                premium: document.getElementById('price-premium'),
+            };
+
+            const phaseBtns = {
+                phase1: document.getElementById('phase-1-btn'),
+                phase2: document.getElementById('phase-2-btn'),
+                phase3: document.getElementById('phase-3-btn'),
+            };
+
+            const packageCtas = document.querySelectorAll('.package-cta');
+            
+            const phaseDates = {
+                phase1End: new Date('2025-10-27T23:59:59'),
+                phase2End: new Date('2025-11-10T23:59:59'),
+                phase3End: new Date('2025-11-21T23:59:59')
+            };
+
+            const prices = {
+                phase1: { esencial: 2100, premium: 2700 },
+                phase2: { esencial: 2350, premium: 2950 },
+                phase3: { esencial: 2600, premium: 3200 }
+            };
+
+            let countdownInterval;
+            let currentPhaseKey = '';
+
+            function updateDisplayForPhase(selectedPhaseKey) {
+                const isCurrent = selectedPhaseKey === currentPhaseKey;
+                const isEnded = currentPhaseKey === 'ended';
+
+                // Style the phase selector buttons
+                Object.keys(phaseBtns).forEach(key => {
+                    const btn = phaseBtns[key];
+                    if (key === selectedPhaseKey) {
+                        btn.classList.remove('bg-transparent', 'text-stone-300');
+                        btn.classList.add('bg-white', 'text-[#3A5A40]');
+                    } else {
+                        btn.classList.remove('bg-white', 'text-[#3A5A40]');
+                        btn.classList.add('bg-transparent', 'text-stone-300');
+                    }
+                });
+
+                // Update prices and CTA buttons
+                if (isCurrent || (isEnded && selectedPhaseKey === 'phase3')) {
+                    const activePrices = prices[selectedPhaseKey];
+                    priceSpans.esencial.innerHTML = `$${activePrices.esencial.toLocaleString()}`;
+                    priceSpans.premium.innerHTML = `$${activePrices.premium.toLocaleString()}`;
+                    packageCtas.forEach(btn => {
+                        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                        btn.href = '#booking';
+                    });
+                } else {
+                    priceSpans.esencial.innerHTML = `<span class="text-3xl">PRÓXIMAMENTE</span>`;
+                    priceSpans.premium.innerHTML = `<span class="text-3xl">PRÓXIMAMENTE</span>`;
+                    packageCtas.forEach(btn => {
+                        btn.classList.add('opacity-50', 'cursor-not-allowed');
+                        btn.removeAttribute('href');
+                    });
+                }
+            }
+
+
+            function setPhaseAndCountdown() {
+                const now = new Date();
+                let targetDate, phaseText;
+
+                if (now <= phaseDates.phase1End) {
+                    currentPhaseKey = 'phase1';
+                    targetDate = phaseDates.phase1End;
+                    phaseText = 'Fase 1';
+                } else if (now <= phaseDates.phase2End) {
+                    currentPhaseKey = 'phase2';
+                    targetDate = phaseDates.phase2End;
+                    phaseText = 'Fase 2';
+                } else if (now <= phaseDates.phase3End) {
+                    currentPhaseKey = 'phase3';
+                    targetDate = phaseDates.phase3End;
+                    phaseText = 'Fase 3';
+                } else {
+                    currentPhaseKey = 'ended';
+                    document.getElementById('countdown-bar').innerHTML = '<p class="text-sm font-semibold uppercase tracking-wider">La preventa ha terminado. ¡Gracias!</p>';
+                }
+                
+                // Set initial display to the current phase
+                updateDisplayForPhase(currentPhaseKey === 'ended' ? 'phase3' : currentPhaseKey);
+                
+                if (countdownElements.phaseName && currentPhaseKey !== 'ended') {
+                    countdownElements.phaseName.textContent = phaseText;
+                }
+                
+                setupPhaseButtons();
+
+                if (targetDate && currentPhaseKey !== 'ended') {
+                    initializeCountdown(targetDate);
+                }
+            }
+
+            function setupPhaseButtons() {
+                phaseBtns.phase1.disabled = false;
+                phaseBtns.phase2.disabled = false;
+                phaseBtns.phase3.disabled = false;
+
+                Object.keys(phaseBtns).forEach(key => {
+                    phaseBtns[key].addEventListener('click', () => {
+                        updateDisplayForPhase(key);
+                    });
+                });
+            }
+
+
+            function initializeCountdown(endDate) {
+                if (countdownInterval) clearInterval(countdownInterval);
+
+                countdownInterval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const distance = endDate - now;
+
+                    if (distance < 0) {
+                        clearInterval(countdownInterval);
+                        setTimeout(setPhaseAndCountdown, 1100); 
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    countdownElements.days.textContent = String(days).padStart(2, '0');
+                    countdownElements.hours.textContent = String(hours).padStart(2, '0');
+                    countdownElements.minutes.textContent = String(minutes).padStart(2, '0');
+                    countdownElements.seconds.textContent = String(seconds).padStart(2, '0');
+                }, 1000);
+            }
+
+            // --- Other Page Logic ---
 
             // FAQ Accordion
             const faqQuestions = document.querySelectorAll('.faq-question');
@@ -411,82 +598,16 @@
                     const icon = question.querySelector('svg');
                     const isOpening = !answer.style.maxHeight;
 
-                    // Close all other open answers
                     faqQuestions.forEach(otherQuestion => {
                         otherQuestion.nextElementSibling.style.maxHeight = null;
                         otherQuestion.querySelector('svg').style.transform = 'rotate(0deg)';
                     });
 
-                    // Open the clicked answer if it was closed
                     if (isOpening) {
                         answer.style.maxHeight = answer.scrollHeight + 'px';
                         icon.style.transform = 'rotate(180deg)';
                     }
                 });
-            });
-
-            // Snow Effect
-            const canvas = document.getElementById('snow-canvas');
-            const ctx = canvas.getContext('2d');
-            let screenWidth = window.innerWidth;
-            let screenHeight = window.innerHeight;
-            canvas.width = screenWidth;
-            canvas.height = screenHeight;
-            const snowflakeCount = 100;
-            const snowflakes = [];
-
-            for (let i = 0; i < snowflakeCount; i++) {
-                snowflakes.push({
-                    x: Math.random() * screenWidth,
-                    y: Math.random() * screenHeight,
-                    radius: Math.random() * 3 + 1,
-                    density: Math.random() * snowflakeCount
-                });
-            }
-
-            let angle = 0;
-            function drawSnowflakes() {
-                ctx.clearRect(0, 0, screenWidth, screenHeight);
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-                ctx.beginPath();
-                for (let i = 0; i < snowflakeCount; i++) {
-                    const sf = snowflakes[i];
-                    ctx.moveTo(sf.x, sf.y);
-                    ctx.arc(sf.x, sf.y, sf.radius, 0, Math.PI * 2, true);
-                }
-                ctx.fill();
-                moveSnowflakes();
-            }
-
-            function moveSnowflakes() {
-                angle += 0.01;
-                for (let i = 0; i < snowflakeCount; i++) {
-                    const sf = snowflakes[i];
-                    sf.y += (Math.cos(angle + sf.density) + 1 + sf.radius / 2) * 0.5;
-                    sf.x += Math.sin(angle) * 0.5;
-
-                    if (sf.y > screenHeight + 5 || sf.x > screenWidth + 5 || sf.x < -5) {
-                        if (i % 3 > 0) {
-                            snowflakes[i] = { ...sf, x: Math.random() * screenWidth, y: -10 };
-                        } else {
-                            if (Math.sin(angle) > 0) {
-                                snowflakes[i] = { ...sf, x: -5, y: Math.random() * screenHeight };
-                            } else {
-                                snowflakes[i] = { ...sf, x: screenWidth + 5, y: Math.random() * screenHeight };
-                            }
-                        }
-                    }
-                }
-            }
-            
-            let snowInterval = setInterval(drawSnowflakes, 33);
-            
-            window.addEventListener('resize', () => {
-                screenWidth = window.innerWidth;
-                screenHeight = window.innerHeight;
-                canvas.width = screenWidth;
-                screenHeight = window.innerHeight;
-                canvas.height = screenHeight;
             });
 
             // Referral Bar Logic
@@ -511,10 +632,16 @@
                     });
                 }
             }
+
+            // Initial call
+            setPhaseAndCountdown();
         });
     </script>
 </body>
 </html>
+
+
+
 
 
 
