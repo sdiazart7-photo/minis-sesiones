@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -33,6 +34,14 @@
         /* Styles for the referral bar visibility */
         #referral-bar {
             transition: transform 0.5s ease-in-out;
+        }
+        /* Custom Swiper Styles */
+        .gallerySwiper {
+            padding-bottom: 10px; 
+        }
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 2rem !important;
         }
     </style>
 </head>
@@ -70,7 +79,7 @@
     
     <main class="relative z-10">
         <!-- Hero Section -->
-        <section id="hero" class="relative min-h-screen bg-cover bg-center flex flex-col justify-end text-white" style="background-image: url('https://res.cloudinary.com/drrhn6t1c/image/upload/v1759779191/Gemini_Generated_Image_1pkp3k1pkp3k1pkp_wbbpr4.jpg');">
+        <section id="hero" class="relative min-h-screen bg-cover bg-center flex flex-col justify-end text-white" style="background-image: url('https://res.cloudinary.com/drrhn6t1c/image/upload/v1761000389/Gemini_Generated_Image_97me6l97me6l97me_i7b0va.png');">
             <!-- Main Content (Bottom Left) -->
             <div class="relative z-10 p-8 md:p-16 pb-24 md:pb-32 max-w-3xl">
                 <!-- Logo -->
@@ -147,13 +156,20 @@
         <!-- Gallery Section -->
         <section id="gallery" class="py-20 bg-[#F7F4F1]">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-5xl font-bold text-stone-800 uppercase">MOODBOARD DEL SET</h2>
-                <p class="mt-4 text-lg text-stone-600">Fotos de referencia, no oficiales</p>
-                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                    <img class="rounded-2xl object-cover w-full h-full shadow-lg" src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1758412019/550373966_666751449791473_5503502816083108949_n_svpjud.jpg" alt="Familia en sesión de fotos navideña">
-                    <img class="rounded-2xl object-cover w-full h-full shadow-lg" src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1758412019/550942291_1037879904956927_7672783883013796823_n_evhpm6.jpg" alt="Pareja en sesión de fotos navideña">
-                    <img class="rounded-2xl object-cover w-full h-full shadow-lg" src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1758412019/551325498_824870766718978_3749429019275772270_n_yi2f58.jpg" alt="Niña sonriendo en ambiente navideño">
-                    <img class="rounded-2xl object-cover w-full h-full shadow-lg" src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1758412019/551503375_809866384898142_4717706556477668569_n_gwqcto.jpg" alt="Detalle de decoración navideña en sesión de fotos">
+                <h2 class="text-5xl font-bold text-stone-800 uppercase">NUESTRO SET NAVIDEÑO</h2>
+                <!-- Swiper -->
+                <div class="swiper gallerySwiper mt-12 relative px-12">
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide"><img class="rounded-2xl object-cover w-full h-full shadow-lg cursor-pointer" src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1760999438/A9726430-9220-49B7-9C3D-6DFC771550DF_bk4mqy.jpg" alt="Foto oficial del set navideño"></div>
+                        <div class="swiper-slide"><img class="rounded-2xl object-cover w-full h-full shadow-lg cursor-pointer" src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1760999438/8B8055F5-63A2-499D-9B29-D1F4818B371C_jky6bs.jpg" alt="Foto oficial del set navideño"></div>
+                        <div class="swiper-slide"><img class="rounded-2xl object-cover w-full h-full shadow-lg cursor-pointer" src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1760999438/6AE7321D-DC86-47D8-B4BE-2E98AA6AD234_cxadtx.jpg" alt="Foto oficial del set navideño"></div>
+                        <div class="swiper-slide"><img class="rounded-2xl object-cover w-full h-full shadow-lg cursor-pointer" src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1760999437/B671C5BB-79A0-423E-84FD-2C93923C8427_xtmaby.jpg" alt="Foto oficial del set navideño"></div>
+                        <div class="swiper-slide"><img class="rounded-2xl object-cover w-full h-full shadow-lg cursor-pointer" src="https://res.cloudinary.com/drrhn6t1c/image/upload/v1760999437/C481A6C9-4475-43F5-B16D-EEF4CA6F3C0E_pyqwsq.jpg" alt="Foto oficial del set navideño"></div>
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <div class="swiper-button-next text-[#8C6D5B]"></div>
+                    <div class="swiper-button-prev text-[#8C6D5B]"></div>
                 </div>
                 <div class="mt-12">
                     <a href="#planes" class="inline-block bg-[#8C6D5B] text-white font-bold text-lg px-10 py-3 rounded-full hover:opacity-90 transition-opacity duration-300">
@@ -268,7 +284,7 @@
                         </button>
                         <div class="faq-answer text-stone-600">
                             <div class="px-6 pb-6">
-                               <p>Para premiar a quienes reservan con anticipación, tenemos precios especiales divididos en tres fases. La Fase 1 tiene el mayor descuento, la Fase 2 un descuento intermedio, y la Fase 3 es el precio normal sin descuento. Los precios se actualizan automáticamente en la página según las fechas de cada fase. ¡Mientras antes reserves, más ahorras!</p>
+                               <p>Para premiar a quienes reservan con anticipación, tenemos precios especiales divididos en tres fases. La Fase 1 tiene el mayor descuento, la Fase 2 un descuento intermedio, y la Fase 3 es el precio final. Los precios se actualizan automáticamente en la página según las fechas de cada fase. ¡Mientras antes reserves, más ahorras!</p>
                             </div>
                         </div>
                     </div>
@@ -292,7 +308,7 @@
                         </button>
                         <div class="faq-answer text-stone-600">
                             <div class="px-6 pb-6">
-                               <p>Las sesiones se realizarán en un estudio fotográfico ubicado en Fundadores (Tijuana B.C) , que estará decorado con una hermosa temática navideña.</p>
+                               <p>Las sesiones se realizarán en un estudio fotográfico ubicado en Fundadores (Tijuana B.C), que estará decorado con una hermosa temática navideña.</p>
                             </div>
                         </div>
                     </div>
@@ -418,6 +434,12 @@
 
     </main>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="fixed inset-0 bg-black/80 z-[10001] hidden items-center justify-center p-4">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white text-5xl opacity-80 hover:opacity-100">&times;</button>
+        <img id="lightbox-image" src="" alt="Vista ampliada" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg">
+    </div>
+
     <!-- Referral Bar -->
     <div id="referral-bar" class="fixed bottom-0 left-0 w-full z-40 bg-white/80 backdrop-blur-md p-3 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] transition-transform duration-500 translate-y-full">
         <div class="max-w-7xl mx-auto flex items-center justify-center sm:justify-between px-4">
@@ -438,7 +460,7 @@
         </div>
     </div>
 
-
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -483,19 +505,17 @@
                 const isCurrent = selectedPhaseKey === currentPhaseKey;
                 const isEnded = currentPhaseKey === 'ended';
 
-                // Style the phase selector buttons
                 Object.keys(phaseBtns).forEach(key => {
                     const btn = phaseBtns[key];
                     if (key === selectedPhaseKey) {
-                        btn.classList.remove('bg-transparent', 'text-stone-300');
                         btn.classList.add('bg-white', 'text-[#3A5A40]');
+                        btn.classList.remove('bg-transparent', 'text-stone-300');
                     } else {
                         btn.classList.remove('bg-white', 'text-[#3A5A40]');
                         btn.classList.add('bg-transparent', 'text-stone-300');
                     }
                 });
 
-                // Update prices and CTA buttons
                 if (isCurrent || (isEnded && selectedPhaseKey === 'phase3')) {
                     const activePrices = prices[selectedPhaseKey];
                     priceSpans.esencial.innerHTML = `$${activePrices.esencial.toLocaleString()}`;
@@ -514,7 +534,6 @@
                 }
             }
 
-
             function setPhaseAndCountdown() {
                 const now = new Date();
                 let targetDate, phaseText;
@@ -522,21 +541,20 @@
                 if (now <= phaseDates.phase1End) {
                     currentPhaseKey = 'phase1';
                     targetDate = phaseDates.phase1End;
-                    phaseText = 'Fase 1';
+                    phaseText = 'FASE 1';
                 } else if (now <= phaseDates.phase2End) {
                     currentPhaseKey = 'phase2';
                     targetDate = phaseDates.phase2End;
-                    phaseText = 'Fase 2';
+                    phaseText = 'FASE 2';
                 } else if (now <= phaseDates.phase3End) {
                     currentPhaseKey = 'phase3';
                     targetDate = phaseDates.phase3End;
-                    phaseText = 'Fase 3';
+                    phaseText = 'FASE 3';
                 } else {
                     currentPhaseKey = 'ended';
                     document.getElementById('countdown-bar').innerHTML = '<p class="text-sm font-semibold uppercase tracking-wider">La preventa ha terminado. ¡Gracias!</p>';
                 }
                 
-                // Set initial display to the current phase
                 updateDisplayForPhase(currentPhaseKey === 'ended' ? 'phase3' : currentPhaseKey);
                 
                 if (countdownElements.phaseName && currentPhaseKey !== 'ended') {
@@ -552,7 +570,7 @@
 
             function setupPhaseButtons() {
                 phaseBtns.phase1.disabled = false;
-                phaseBtns.phase2.disabled = false;
+                phaseBtns.phase2.disabled = false; 
                 phaseBtns.phase3.disabled = false;
 
                 Object.keys(phaseBtns).forEach(key => {
@@ -562,10 +580,8 @@
                 });
             }
 
-
             function initializeCountdown(endDate) {
                 if (countdownInterval) clearInterval(countdownInterval);
-
                 countdownInterval = setInterval(() => {
                     const now = new Date().getTime();
                     const distance = endDate - now;
@@ -633,12 +649,62 @@
                 }
             }
 
+            // --- Swiper for Gallery ---
+            var gallerySwiper = new Swiper(".gallerySwiper", {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+                },
+            });
+
+            // --- Lightbox Logic ---
+            const lightboxModal = document.getElementById('lightbox-modal');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCloseBtn = document.getElementById('lightbox-close');
+            const galleryImages = document.querySelectorAll('.gallerySwiper .swiper-slide img');
+
+            galleryImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    lightboxImage.src = img.src;
+                    lightboxModal.classList.remove('hidden');
+                    lightboxModal.classList.add('flex');
+                });
+            });
+
+            function closeLightbox() {
+                lightboxModal.classList.add('hidden');
+                lightboxModal.classList.remove('flex');
+                lightboxImage.src = '';
+            }
+
+            lightboxCloseBtn.addEventListener('click', closeLightbox);
+            lightboxModal.addEventListener('click', (e) => {
+                if (e.target === lightboxModal) {
+                    closeLightbox();
+                }
+            });
+
             // Initial call
             setPhaseAndCountdown();
         });
     </script>
 </body>
 </html>
+
+
+
 
 
 
